@@ -1,24 +1,25 @@
-THISDIR=`pwd`
-THISBASE=`basename $THISDIR`
-THISUSER=`whoami`
+#!/bin/bash
 
-source ./config.sh
-LARPROD=`echo larsoft_${LARVERSION}_${LARQUAL} | sed 's/:/_/g'`
-GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
-USE_DATACONVERTER=
-LINE="=========================================================="
-echo LArSoft      version: $LARVERSION
-echo LArSoft    qualifier: $LARQUAL
-echo LArSoft product name: $LARPROD
-echo       Local products: $LOCALPRODS
-echo Branch name: $GIT_BRANCH_NAME
+# lbnecheckout
+# Check out the development packages.
 
-HAVE_WORKDIR=`ls -d workdir 2>/dev/null`
+PKGFILE=./packages.txt
+if ! test -r $PKGFILE; then
+  Package file not found: $PKGFILE
+  exit 1
+fi
 
-# Setup LArSoft with LBNE code
-source /grid/fermiapp/lbne/software/setup_lbne.sh
+# Perform setup if needed.
+if test -z $LBNE_IS_SETUP; then
+  source ./lbnesetup.sh
+  if test -z $LBNE_IS_SETUP; then
+    echo LBNE setup failed.
+    exit 1
+  fi
+fi
 
 # Create working area if needed.
+HAVE_WORKDIR=`ls -d workdir 2>/dev/null`
 echo $LINE
 if [ -z "$HAVE_WORKDIR" ]; then
   echo Creating new workdir
@@ -30,7 +31,7 @@ fi
 cd workdir
 echo $LINE
 echo Setting up for local products
-source /grid/fermiapp/products/larsoft/setup
+# Not-needed? source /grid/fermiapp/products/larsoft/setup
 setup git
 setup gitflow
 setup mrb
@@ -38,7 +39,7 @@ export MRB_PROJECT=larsoft
 
 echo $LINE
 echo Setting up larsoft
-setup larsoft $LARVERSION -q $LARQUAL
+setup larsoft $LBNE_LARVERSION -q $LBNE_RQUAL
 
 if [ -z "$HAVE_WORKDIR" ]; then
   echo $LINE
@@ -47,12 +48,13 @@ if [ -z "$HAVE_WORKDIR" ]; then
   echo MRB_BUILDIR = $MRB_BUILDDIR
 fi
 
-source localProducts_$LARPROD/setup
+source localProducts_$LBNE_LARPROD/setup
 
 cd srcs
 # Loop over local packages and check out if not already present.
 echo $LINE
 echo Checking out packages
+LOCALPRODS=`cat $PKGFILE`
 for PKG in $LOCALPRODS; do
   echo $LINE
   if test -r $PKG; then
