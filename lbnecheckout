@@ -3,12 +3,6 @@
 # lbnecheckout
 # Check out the development packages.
 
-PKGFILE=./packages.txt
-if ! test -r $PKGFILE; then
-  Package file not found: $PKGFILE
-  exit 1
-fi
-
 # Perform setup if needed.
 if test -z $LBNE_IS_SETUP; then
   source ./lbnesetup.sh
@@ -16,6 +10,12 @@ if test -z $LBNE_IS_SETUP; then
     echo LBNE setup failed.
     exit 1
   fi
+fi
+
+PKGFILE=$LBNE_DEVDIR/packages.txt
+if ! test -r $PKGFILE; then
+  echo Package file not found: $PKGFILE
+  exit 1
 fi
 
 # Create working area if needed.
@@ -28,12 +28,12 @@ else
   echo Using existing workdir
 fi
 
-cd workdir
+cd $LBNE_DEVDIR/workdir
 echo $LINE
 echo Setting up for local products
 # Not-needed? source /grid/fermiapp/products/larsoft/setup
 setup git
-setup gitflow
+#tmp setup gitflow
 setup mrb
 export MRB_PROJECT=larsoft
 
@@ -69,11 +69,13 @@ for PKG in $LOCALPRODS; do
       echo $LINE
       echo Create local feature branch
       cd $PKG
-      git flow feature start $GIT_BRANCH_NAME
+      #tmp git flow feature start $GIT_BRANCH_NAME
       cd ..
     fi
   fi
 done
+
+exit 2
 
 echo $LINE
 echo Building

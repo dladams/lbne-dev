@@ -1,11 +1,11 @@
 if test -z "${LBNE_IS_SETUP}"; then
-  THISDIR=`pwd`
-  THISBASE=`basename $THISDIR`
+  export LBNE_DEVDIR=`pwd`
+  THISBASE=`basename $LBNE_DEVDIR`
   THISUSER=`whoami`
   source ./config.sh
-  LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_RQUAL} | sed 's/:/_/g'`
-  LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
-  LBNE_LINE="=========================================================="
+  export LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_RQUAL} | sed 's/:/_/g'`
+  export LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
+  export LBNE_LINE="=========================================================="
   echo LArSoft      version: $LBNE_LARVERSION
   echo            qualifier: $LBNE_QUAL
   echo LArSoft product name: $LBNE_LARPROD
@@ -26,7 +26,7 @@ if test -z "${LBNE_IS_SETUP}"; then
       echo Initial setup file not found!
     fi
   fi
-  LBNE_IS_SETUP=True
+  export LBNE_IS_SETUP=True
 echo Initial setup file: $SETUPFILE
 else
   echo LBNE is already set up--No action taken.

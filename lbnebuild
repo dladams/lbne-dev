@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# lbnecheckout
+# Check out the development packages.
+
+# Perform setup if needed.
+if test -z $LBNE_IS_SETUP; then
+  source ./lbnesetup.sh
+  if test -z $LBNE_IS_SETUP; then
+    echo LBNE setup failed.
+    exit 1
+  fi
+fi
+
+cd $LBNE_DEVDIR/workdir
+echo $LINE
+echo Setting up for local products
+source /grid/fermiapp/products/larsoft/setup
+setup git
+#tmp setup gitflow
+setup mrb
+export MRB_PROJECT=larsoft
+
+echo $LINE
+echo Setting up larsoft
+setup larsoft $LBNE_LARVERSION -q $LBNE_RQUAL
+
+if [ -z "$HAVE_WORKDIR" ]; then
+  echo $LINE
+  echo Creating mrb area
+  mrb newDev 
+  echo MRB_BUILDIR = $MRB_BUILDDIR
+fi
+
+source localProducts_$LBNE_LARPROD/setup
+
+echo $LINE
+echo Building
+cd $MRB_BUILDDIR
+mrbsetenv
+mrb i -j4
+
+echo Set up to run
+mrbslp
+cd $THISDIR
+
+echo
+echo Generate an event: lar -n 10 -c prodsingle_lbne35t.fcl
+echo Event display: lar -c evd_lbne35t.fcl single35t_gen.root
