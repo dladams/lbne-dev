@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# lbnecheckout
-# Check out the development packages.
+# lbnebuild
+# Build checked-out code.
 
 # Perform setup if needed.
 if test -z $LBNE_IS_SETUP; then
@@ -13,28 +13,21 @@ if test -z $LBNE_IS_SETUP; then
 fi
 
 cd $LBNE_DEVDIR/workdir
-echo $LINE
+echo $LBNE_LINE
 echo Setting up for local products
-source /grid/fermiapp/products/larsoft/setup
+#source /grid/fermiapp/products/larsoft/setup
 setup git
 #tmp setup gitflow
 setup mrb
 export MRB_PROJECT=larsoft
 
-echo $LINE
+echo $LBNE_LINE
 echo Setting up larsoft
-setup larsoft $LBNE_LARVERSION -q $LBNE_RQUAL
-
-if [ -z "$HAVE_WORKDIR" ]; then
-  echo $LINE
-  echo Creating mrb area
-  mrb newDev 
-  echo MRB_BUILDIR = $MRB_BUILDDIR
-fi
+setup larsoft $LBNE_LARVERSION -q $LBNE_QUAL
 
 source localProducts_$LBNE_LARPROD/setup
 
-echo $LINE
+echo $LBNE_LINE
 echo Building
 cd $MRB_BUILDDIR
 mrbsetenv
