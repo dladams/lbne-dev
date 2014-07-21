@@ -18,7 +18,29 @@ export LBNE_PROJECT=larsoft
 export LBNE_LARVERSION=v02_02_01
 export LBNE_QUAL=e5:prof
 export LBNE_VERBOSE=False
-source $LBNE_DEVDIR/config.sh
+export LBNE_CONFIG_FILE=$LBNE_DEVDIR/config.sh
+export LBNE_PACKAGE_FILE=$LBNE_DEVDIR/packages.txt
+export LBNE_LINE="=========================================================="
+
+if ! test -r $LBNE_CONFIG_FILE; then
+  echo $LBNE_LINE
+  echo Copying default configuration file to
+  echo "  $LBNE_CONFIG_FILE"
+  echo Please modify appropriately.
+  cp $LBNE_INSDIR/config.sh $LBNE_CONFIG_FILE
+  echo $LBNE_LINE
+fi
+
+source $LBNE_CONFIG_FILE
+
+if ! test -r $LBNE_PACKAGE_FILE; then
+  echo $LBNE_LINE
+  echo Copying default package list file to
+  echo "  $LBNE_PACKAGE_FILE"
+  echo Please modify appropriately.
+  cp $LBNE_INSDIR/packages.txt $LBNE_PACKAGE_FILE
+  echo $LBNE_LINE
+fi
 
 # If not already set, use the current directory as the location of
 # the LBNE development area.
@@ -42,22 +64,12 @@ else
     echo UPS setup file not found!
   fi
 fi
+export LBNE_UPS_SETUP=$SETUPFILE
 
 # Setup derived environment.
 THISBASE=`basename $LBNE_DEVDIR`
 THISUSER=`whoami`
 export LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_QUAL} | sed 's/:/_/g'`
 export LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
-export LBNE_LINE="=========================================================="
 export MRB_PROJECT=$LBNE_PROJECT
-export LBNE_SHOW=True
-if test -z "$LBNE_IS_SETUP"; then LBNE_SHOW=True; fi
 export LBNE_IS_SETUP=True
-
-if test -n "$LBNE_SHOW"; then
-  echo $LBNE_LINE
-  $LBNE_INSDIR/lbne show
-  echo $LBNE_LINE
-  LBNE_SHOW=
-fi
-

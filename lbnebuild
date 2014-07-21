@@ -26,7 +26,3 @@ mrb i -j4
 echo Set up to run
 mrbslp
 cd $THISDIR
-
-echo
-echo Generate an event: lar -n 10 -c prodsingle_lbne35t.fcl
-echo Event display: lar -c evd_lbne35t.fcl single35t_gen.root

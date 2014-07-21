@@ -5,10 +5,6 @@
 
 # LBNE setup.
 source $LBNE_INSDIR/lbnesetup.sh
-if test -z $LBNE_IS_SETUP; then
-  echo LBNE setup failed.
-  exit 1
-fi
 
 PKGFILE=$LBNE_DEVDIR/packages.txt
 if ! test -r $PKGFILE; then
