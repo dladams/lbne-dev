@@ -3,23 +3,13 @@
 # lbnebuild
 # Build checked-out code.
 
-# Perform setup if needed.
-if test -z $LBNE_IS_SETUP; then
-  source ./lbnesetup.sh
-  if test -z $LBNE_IS_SETUP; then
-    echo LBNE setup failed.
-    exit 1
-  fi
-fi
+# LBNE setup.
+source $LBNE_INSDIR/lbnesetup.sh
 
 cd $LBNE_DEVDIR/workdir
 echo $LBNE_LINE
 echo Setting up for local products
 #source /grid/fermiapp/products/larsoft/setup
-setup git
-#tmp setup gitflow
-setup mrb
-export MRB_PROJECT=larsoft
 
 echo $LBNE_LINE
 echo Setting up larsoft

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# lbnehelp
+#
+# David Adams
+# July 2014
+
+echo '
+  Usage: lbne COM
+  
+  COM
+  ---
+  checkout - To check out the packages listed in packages.txt.
+  build - To build all checked-out packages.
+  clean - To remove build and checked-out packages
+  show - Shows some  configuration information.
+  help - This message.
+
+  The build configuration is specified in config.sh.
+'
+

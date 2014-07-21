@@ -1,0 +1,13 @@
+# lbneshow
+#
+# David Adams
+# July 2013
+
+echo "     LBNE script dir: $LBNE_INSDIR"
+echo "LBNE development dir: $LBNE_DEVDIR"
+echo "      UPS setup file: $SETUPFILE"
+echo "             Project: $LBNE_PROJECT"
+echo "     LArSoft version: $LBNE_LARVERSION"
+echo "           qualifier: $LBNE_QUAL"
+echo "LArSoft product name: $LBNE_LARPROD"
+echo "         Branch name: $LBNE_GIT_BRANCH_NAME"

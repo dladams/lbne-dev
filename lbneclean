@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# lbneclean
+#
+# David Adams
+# July 2014
+
+if test -z "$LBNE_DEVDIR"; then
+  echo Development directory not found.
+  exit 1
+fi
+
+echo Cleaning...
+rm -rf workdir

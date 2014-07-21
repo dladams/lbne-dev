@@ -3,13 +3,11 @@
 # lbnecheckout
 # Check out the development packages.
 
-# Perform setup if needed.
+# LBNE setup.
+source $LBNE_INSDIR/lbnesetup.sh
 if test -z $LBNE_IS_SETUP; then
-  source ./lbnesetup.sh
-  if test -z $LBNE_IS_SETUP; then
-    echo LBNE setup failed.
-    exit 1
-  fi
+  echo LBNE setup failed.
+  exit 1
 fi
 
 PKGFILE=$LBNE_DEVDIR/packages.txt
@@ -69,14 +67,10 @@ for PKG in $LOCALPRODS; do
   fi
 done
 
-exit 2
+echo $LBNE_LINE
+exit 5
 
 echo $LBNE_LINE
-echo Building
-cd $MRB_BUILDDIR
-mrbsetenv
-mrb i -j4
-
 echo Set up to run
 mrbslp
 cd $THISDIR
@@ -84,3 +78,4 @@ cd $THISDIR
 echo
 echo Generate an event: lar -n 10 -c prodsingle_lbne35t.fcl
 echo Event display: lar -c evd_lbne35t.fcl single35t_gen.root
+echo $LBNE_LINE
