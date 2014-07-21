@@ -6,7 +6,7 @@
 # July 2014
 
 echo '
-  Usage: lbne COM
+  Usage: lbne COM [RUNCOM]
   
   COM
   ---
@@ -14,6 +14,7 @@ echo '
   build - To build all checked-out packages.
   clean - To remove build and checked-out packages
   show - Shows some  configuration information.
+  run - Run the command RUNCOM.
   help - This message.
 
   The build configuration is specified in config.sh.
