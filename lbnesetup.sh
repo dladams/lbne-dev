@@ -13,6 +13,10 @@ fi
 alias lbne=$LBNE_INSDIR/lbne
 alias lb=$LBNE_INSDIR/lbne
 
+# If not already set, use the current directory as the location of
+# the LBNE development area.
+if test -z "$LBNE_DEVDIR"; then export LBNE_DEVDIR=`pwd`; fi
+
 # Read local configuration.
 export LBNE_PROJECT=larsoft
 export LBNE_LARVERSION=v02_02_01
@@ -41,10 +45,6 @@ if ! test -r $LBNE_PACKAGE_FILE; then
   cp $LBNE_INSDIR/packages.txt $LBNE_PACKAGE_FILE
   echo $LBNE_LINE
 fi
-
-# If not already set, use the current directory as the location of
-# the LBNE development area.
-if test -z "$LBNE_DEVDIR"; then export LBNE_DEVDIR=`pwd`; fi
 
 # Set up UPS, git and mrb.
 if test -n "${LBNE_VERPOSE}"; then echo Setting up UPS; fi
