@@ -4,7 +4,7 @@
 # July 2013
 
 # LBNE setup.
-source $LBNE_INSDIR/lbnesetup.sh
+source $LBNE_INSDIR/lbneinit.sh
 
 echo "     LBNE script dir: $LBNE_INSDIR"
 echo "LBNE development dir: $LBNE_DEVDIR"

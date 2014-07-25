@@ -1,4 +1,4 @@
-# lbinit.sh
+# lbneinit.sh
 #
 # David Adams
 # July 2013
@@ -58,3 +58,6 @@ export LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_QUAL} | sed 's/:/_/g
 export LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
 export MRB_PROJECT=$LBNE_PROJECT
 export LBNE_IS_SETUP=True
+
+# Terminate error checks.
+fi; fi

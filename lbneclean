@@ -11,4 +11,4 @@ if test -z "$LBNE_DEVDIR"; then
 fi
 
 echo Cleaning...
-rm -rf workdir
+rm -rf $LBNE_DEVDIR/workdir

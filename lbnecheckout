@@ -4,7 +4,7 @@
 # Check out the development packages.
 
 # LBNE setup.
-source $LBNE_INSDIR/lbnesetup.sh
+source $LBNE_INSDIR/lbneinit.sh
 
 PKGFILE=$LBNE_DEVDIR/packages.txt
 if ! test -r $PKGFILE; then

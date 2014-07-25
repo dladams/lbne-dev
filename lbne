@@ -1,7 +1,8 @@
 #!/bin/sh
 
 SUBCOM=$1
-RUNCOM=$2
+shift
+ARGS="$*"
 
 if [ -z "$SUBCOM" -o "$SUBCOM" = "-h" ]; then
   echo Usage: lbne COM
@@ -16,14 +17,5 @@ if ! test -x $COM; then
   exit 1
 fi
 
-$COM
-
-if [ $SUBCOM = run -a -n "$RUNCOM" ]; then
-  shift
-  source $LBNE_DEVDIR/run.sh
-  echo $LBNE_LINE
-  echo Running command: $RUNCOM
-  echo $LBNE_LINE
-  $RUNCOM
-fi
+$COM $ARGS
   

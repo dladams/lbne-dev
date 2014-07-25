@@ -3,6 +3,7 @@ lbne-dev
 
 David Adams
 July 2014
+Update July 25, 2014
 
 Package to help with the checkout, build and running of LBNE SW.
 For now, only larsoft is supported.
@@ -12,31 +13,32 @@ Use "lbne help" to see available commands.
 Example session
 ---------------
 # Installing this package
-cd SOMEPATH
+mkdir PKGPATH
+cd PKGPATH
 git clone https://github.com/dladams/lbne-dev
 
-# Creating and build a development area.
-mkdir MYDEVDIR
-cd MYDEVDIR
-source SOMEPATH/lbne-dev/lbnesetup.sh
+# Creating and building a development area.
+# This also initializes the session
+mkdir DEVDIR
+cd DEVDIR
+source PKGPATH/lbnesetup.sh
 # Edit config.sh and packages.txt
+
+# To initialize in subsequent sessions
+source DEVDIR/lbnesetup.sh
+
+# To check out packges initially or after modifying the list.
+# The list of packages is in packages.txt
 lbne checkout
+
+# To build after checkout or local changes.
 lbne build
 
-# Run something in a dedicated session.
-# This is not yet working.
+# To run something in a dedicated session.
 lbne run lar -n 10 -c prodsingle_lbne35t.fcl
 
-# Set up to run in session where the build was done.
-# This needs to be done once per session.
+# To run in the current session.
 source $LBNE_DEVDIR/run.sh
-
-# Set up to run in another session using the 
-# existing build at MYDEVDIR.
-# This needs to be done once per session.
-cd MYDEVDIR
-source run.sh
-
-# Run in the current session after setup.
 lar -n 10 -c prodsingle_lbne35t.fcl
+
 ---------------

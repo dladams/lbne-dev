@@ -4,7 +4,7 @@
 # Build checked-out code.
 
 # LBNE setup.
-source $LBNE_INSDIR/lbnesetup.sh
+source $LBNE_INSDIR/lbneinit.sh
 
 cd $LBNE_DEVDIR/workdir
 echo $LBNE_LINE

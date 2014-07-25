@@ -14,19 +14,18 @@ if test -r $SETUPFILE; then
 else
 
   # Capture the location where the LBNE scripts are installed.
+  THISFILE=`readlink -f $BASH_SOURCE`
+  THISDIR=`dirname $THISFILE`
   if test -z "$LBNE_INSDIR"; then
-    THISFILE=`readlink -f $BASH_SOURCE`
-    export LBNE_INSDIR=`dirname $THISFILE`
+    export LBNE_INSDIR=$THISDIR
   else
-    NEWDIR=`dirname $THISFILE`
-    if [ $NEWDIR != $LBNE_INSDIR ]; then
+    if [ $THISDIR != $LBNE_INSDIR ]; then
       echo Build support package directory is being changed:
       echo "  Old: $LBNE_INSDIR"
-      echo "  New: $NEWDIR"
-      export LBNE_INSDIR=$NEWDIR
+      echo "  New: $THISDIR"
+      export LBNE_INSDIR=$THISDIR
     fi
   fi
-
 
   # If not already set, use the current directory as the location of
   # the LBNE development area.
@@ -47,8 +46,8 @@ else
 #
 # Generated at `date`
 
-LBNE_INSDIR=$LBNE_INSDIR
-LBNE_DEVDIR=$LBNE_DEVDIR
+export LBNE_INSDIR=$LBNE_INSDIR
+export LBNE_DEVDIR=$LBNE_DEVDIR
 alias lbne=\$LBNE_INSDIR/lbne
 alias lb=\$LBNE_INSDIR/lbne" >> $SETUPFILE
 
@@ -59,7 +58,7 @@ if ! test -r $FILE; then
   echo Copying default configuration file to
   echo "  $FILE"
   echo Please modify appropriately.
-  cp $LBNE_INSDIR/config.sh $LBNE_CONFIG_FILE
+  cp $LBNE_INSDIR/config.sh $FILE
 fi
 
 # If absent, create a package list.
