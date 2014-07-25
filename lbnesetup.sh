@@ -3,73 +3,77 @@
 # David Adams
 # July 2013
 #
-# Bash file to be sourced to check out or build LBNE SW.
+# Bash file to set the environment to make use the build scripts
+# in this package.
 
-# Capture the location where the LBNE scripts are installed.
-if test -z "$LBNE_INSDIR"; then
-  THISFILE=`readlink -f $BASH_SOURCE`
-  export LBNE_INSDIR=`dirname $THISFILE`
-fi
-alias lbne=$LBNE_INSDIR/lbne
-alias lb=$LBNE_INSDIR/lbne
+SETUPFILE=`pwd`/lbnesetup.sh
+if test -r $SETUPFILE; then
+  echo Local setup file already exists: $SETUPFILE
+  echo Please is source it rather than the one in the build support package.
 
-# If not already set, use the current directory as the location of
-# the LBNE development area.
-if test -z "$LBNE_DEVDIR"; then export LBNE_DEVDIR=`pwd`; fi
+else
 
-# Read local configuration.
-export LBNE_PROJECT=larsoft
-export LBNE_LARVERSION=v02_02_01
-export LBNE_QUAL=e5:prof
-export LBNE_VERBOSE=False
-export LBNE_CONFIG_FILE=$LBNE_DEVDIR/config.sh
-export LBNE_PACKAGE_FILE=$LBNE_DEVDIR/packages.txt
-export LBNE_LINE="=========================================================="
+  # Capture the location where the LBNE scripts are installed.
+  if test -z "$LBNE_INSDIR"; then
+    THISFILE=`readlink -f $BASH_SOURCE`
+    export LBNE_INSDIR=`dirname $THISFILE`
+  else
+    NEWDIR=`dirname $THISFILE`
+    if [ $NEWDIR != $LBNE_INSDIR ]; then
+      echo Build support package directory is being changed:
+      echo "  Old: $LBNE_INSDIR"
+      echo "  New: $NEWDIR"
+      export LBNE_INSDIR=$NEWDIR
+    fi
+  fi
 
-if ! test -r $LBNE_CONFIG_FILE; then
-  echo $LBNE_LINE
+
+  # If not already set, use the current directory as the location of
+  # the LBNE development area.
+  if test -z "$LBNE_DEVDIR"; then
+    export LBNE_DEVDIR=`pwd`
+  else
+    NEWDIR=`pwd`
+    if [ $NEWDIR != $LBNE_DEVDIR ]; then
+      echo Development directory is being changed:
+      echo "  Old: $LBNE_DEVDIR"
+      echo "  New: $NEWDIR"
+      export LBNE_DEVDIR=$NEWDIR
+    fi
+  fi
+
+  # Create the local setup file
+  echo "# lbnesetup.sh
+#
+# Generated at `date`
+
+LBNE_INSDIR=$LBNE_INSDIR
+LBNE_DEVDIR=$LBNE_DEVDIR
+alias lbne=\$LBNE_INSDIR/lbne
+alias lb=\$LBNE_INSDIR/lbne" >> $SETUPFILE
+
+# If absent, create a configuration file.
+FILE=$LBNE_DEVDIR/config.sh
+if ! test -r $FILE; then
+  echo
   echo Copying default configuration file to
-  echo "  $LBNE_CONFIG_FILE"
+  echo "  $FILE"
   echo Please modify appropriately.
   cp $LBNE_INSDIR/config.sh $LBNE_CONFIG_FILE
-  echo $LBNE_LINE
 fi
 
-source $LBNE_CONFIG_FILE
-
-if ! test -r $LBNE_PACKAGE_FILE; then
-  echo $LBNE_LINE
-  echo Copying default package list file to
-  echo "  $LBNE_PACKAGE_FILE"
+# If absent, create a package list.
+FILE=$LBNE_DEVDIR/packages.txt
+if ! test -r $FILE; then
+  echo
+  echo Copying default package list to
+  echo "  $FILE"
   echo Please modify appropriately.
-  cp $LBNE_INSDIR/packages.txt $LBNE_PACKAGE_FILE
-  echo $LBNE_LINE
+  cp $LBNE_INSDIR/packages.txt $FILE
 fi
 
-# Set up UPS, git and mrb.
-if test -n "${LBNE_VERPOSE}"; then echo Setting up UPS; fi
-PRODUCTS=
-SETUPFILE=/grid/fermiapp/lbne/software/setup_lbne.sh
-if [ -r $SETUPFILE ]; then
-  source $SETUPFILE
-else
-  SETUPFILE=/afs/rhic.bnl.gov/lbne/software/products/setup
-  if [ -r $SETUPFILE ]; then
-    source $SETUPFILE
-    setup git
-    setup gitflow
-    setup mrb
-  else
-    SETUPFILE="Not found"
-    echo UPS setup file not found!
-  fi
-fi
-export LBNE_UPS_SETUP=$SETUPFILE
+# Source the local setup file.
+source $SETUPFILE
 
-# Setup derived environment.
-THISBASE=`basename $LBNE_DEVDIR`
-THISUSER=`whoami`
-export LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_QUAL} | sed 's/:/_/g'`
-export LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
-export MRB_PROJECT=$LBNE_PROJECT
-export LBNE_IS_SETUP=True
+fi
+
