@@ -1,7 +1,7 @@
 # lbneinit.sh
 #
 # David Adams
-# July 2013
+# July 2014
 #
 # Bash file to be sourced to check out or build LBNE SW.
 
@@ -31,10 +31,11 @@ export LBNE_LINE="=========================================================="
 source $LBNE_CONFIG_FILE
 
 # Set up UPS, git and mrb.
-if test -n "${LBNE_VERPOSE}"; then echo Setting up UPS; fi
+if test -n "${LBNE_VERBOSE}"; then echo Setting up UPS; fi
 PRODUCTS=
 # FNAL
-SETUPFILE=/grid/fermiapp/lbne/software/setup_lbne.sh
+#SETUPFILE=/grid/fermiapp/lbne/software/setup_lbne.sh
+SETUPFILE=$LBNE_INSDIR/fnal_setup_lbne.sh
 if [ -r $SETUPFILE ]; then
   source $SETUPFILE
 else
