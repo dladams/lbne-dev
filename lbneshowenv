@@ -1,0 +1,15 @@
+# lbneshowenv
+#
+# David Adams
+# August 2014
+#
+# Show the LBNE envirnmental variables.
+
+# LBNE setup.
+source $LBNE_INSDIR/lbneinit.sh
+
+echo "     LLBNE_INSDIR = $LBNE_INSDIR"
+echo "      LBNE_DEVDIR = $LBNE_DEVDIR"
+echo "  LBNE_LARVERISON = $LBNE_LARVERSION"
+echo "        LBNE_QUAL = $LBNE_QUAL"
+echo "     LBNE_LARPROD = $LBNE_LARPROD"

@@ -1,7 +1,9 @@
 # lbneshow
 #
 # David Adams
-# July 2013
+# July 2014
+#
+# Show the LBNE enviroment.
 
 # LBNE setup.
 source $LBNE_INSDIR/lbneinit.sh

@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # lbnecheckout
+#
+# David Adams
+# July 2014
+#
 # Check out the development packages.
 
 # LBNE setup.

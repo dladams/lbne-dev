@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # lbnebuild
-# Build checked-out code.
+#
+# David Adams
+# July 2014
+#
+# Build the checked-out code.
 
 # LBNE setup.
 source $LBNE_INSDIR/lbneinit.sh
 
 cd $LBNE_DEVDIR/workdir
-echo $LBNE_LINE
-echo Setting up for local products
-#source /grid/fermiapp/products/larsoft/setup
 
 echo $LBNE_LINE
 echo Setting up larsoft
@@ -18,8 +19,8 @@ setup larsoft $LBNE_LARVERSION -q $LBNE_QUAL
 source localProducts_$LBNE_LARPROD/setup
 
 echo $LBNE_LINE
-echo Building
 cd $MRB_BUILDDIR
+echo Building in `pwd`
 mrbsetenv
 mrb i -j4
 
