@@ -45,6 +45,9 @@ else
 fi; fi
 if [ -n "$SETUPFILE" -a -r "$SETUPFILE" ]; then
   source $SETUPFILE
+  setup git
+  setup gitflow
+  setup mrb
   export LBNE_UPS_SETUP=$SETUPFILE
 
   # Setup derived environment.

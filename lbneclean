@@ -12,3 +12,4 @@ fi
 
 echo Cleaning...
 rm -rf $LBNE_DEVDIR/workdir
+rm -rf $LBNE_DEVDIR/run.sh

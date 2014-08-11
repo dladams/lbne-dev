@@ -1,19 +1,9 @@
 #!/bin/bash
 
 # lbnerun
-# Create setup file for running.
+# Run a command in the lbne-dev run environment.
 
-# LBNE setup.
-source $LBNE_INSDIR/lbneinit.sh
-
-cd $LBNE_DEVDIR/workdir
 RUNSCRIPT=$LBNE_DEVDIR/run.sh
-rm -f $RUNSCRIPT
-echo "source $LBNE_INSDIR/lbneinit.sh" >>$RUNSCRIPT
-for SETUP in $LBNE_DEVDIR/workdir/localProducts*/setup; do
-  echo source $SETUP >>$RUNSCRIPT
-done
-echo mrbslp >>$RUNSCRIPT
 
 if [ $# -eq 0 ]; then
   echo To set up to run with this build:

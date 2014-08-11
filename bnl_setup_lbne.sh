@@ -1,9 +1,7 @@
-SETUPFILE=/afs/rhic.bnl.gov/lbne/software/products/setup
-if [ -r $SETUPFILE ]; then
-  source $SETUPFILE
-  setup gitflow
-  setup mrb
+BNLSETUPFILE=/afs/rhic.bnl.gov/lbne/software/products/setup
+if [ -r $BNLSETUPFILE ]; then
+  echo Setting up PRODUCTS for BNL
+  source $BNLSETUPFILE
 else
-  SETUPFILE="Not found"
   echo BNL UPS setup file not found!
 fi
