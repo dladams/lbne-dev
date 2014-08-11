@@ -1,7 +1,7 @@
 # lbnesetup.sh
 #
 # David Adams
-# July 2013
+# July 2014
 #
 # Bash file to set the environment to make use the build scripts
 # in this package.
