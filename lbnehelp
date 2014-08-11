@@ -8,7 +8,7 @@
 # Show avalable lbne commands.
 
 echo '
-  Usage: lbne COM [RUNCOM]
+  Usage: lbne COM [ARG]
   
   COM
   ---
@@ -17,7 +17,9 @@ echo '
   clean - To remove build and checked-out packages
   show - Shows configuration information.
   showenv - Shows configuration environment.
-  run - Run the command RUNCOM.
+  runscript - Install the runs cript used in run and shell
+  run - Run the command ARG.
+  shell - Start a shell to run commands.
   help - This message.
 
   The build configuration is specified in config.sh.

@@ -41,4 +41,9 @@ lbne run lar -n 10 -c prodsingle_lbne35t.fcl
 source $LBNE_DEVDIR/run.sh
 lar -n 10 -c prodsingle_lbne35t.fcl
 
+# To run commands in a sub shell.
+lbne shell
+lar -n 10 -c prodsingle_lbne35t.fcl
+exit
+
 ---------------

@@ -1,1 +1,2 @@
+$LBNE_INSDIR/lbne runscript
 bash --rcfile $LBNE_DEVDIR/run.sh

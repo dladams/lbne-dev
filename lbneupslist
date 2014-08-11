@@ -1,0 +1,15 @@
+# lbneupslist
+#
+# David Adams
+# July 2014
+#
+# List UPS products
+
+# LBNE setup.
+source $LBNE_INSDIR/lbneinit.sh
+
+ARG=$1
+if [ -z "$ARG" ]; then
+  ARG=larsoft
+fi
+ups list -aK+ | grep $ARG
