@@ -13,15 +13,17 @@ Use "lbne help" to see available commands.
 
 ```
 # Installing this package
+# Package is installed at PKGDIR = PKGPATH/lbne-dev
 mkdir PKGPATH
 cd PKGPATH
 git clone https://github.com/dladams/lbne-dev
 
 # Creating and building a development area.
+# SW is installed an built in dedicated directory DEVDIR.
 # This also initializes the session
 mkdir DEVDIR
 cd DEVDIR
-source PKGPATH/lbnesetup.sh
+source PKGDIR/lbnesetup.sh
 # Edit config.sh and packages.txt
 
 # To initialize in subsequent sessions
