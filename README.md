@@ -1,9 +1,10 @@
-lbne-dev
-========
+# lbne-dev
 
+'''
 David Adams
 July 2014
 Update July 25, 2014
+'''
 
 Package to help with the checkout, build and running of LBNE SW.
 For now, only larsoft is supported.
@@ -11,7 +12,7 @@ For now, only larsoft is supported.
 Use "lbne help" to see available commands.
 
 Example session
----------------
+'''
 # Installing this package
 mkdir PKGPATH
 cd PKGPATH
@@ -45,5 +46,4 @@ lar -n 10 -c prodsingle_lbne35t.fcl
 lbne shell
 lar -n 10 -c prodsingle_lbne35t.fcl
 exit
-
----------------
+'''
