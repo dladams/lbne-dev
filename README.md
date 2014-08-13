@@ -9,7 +9,7 @@ For now, only larsoft is supported.
 
 Use "lbne help" to see available commands.
 
-Example session
+## Example session
 
 ```
 # Installing this package
