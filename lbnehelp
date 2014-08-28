@@ -20,6 +20,7 @@ echo '
   runscript - Install the runs cript used in run and shell
   run - Run the command ARG.
   shell - Start a shell to run commands.
+  upslist - List available versions of UPS packge ARG [larsoft]
   help - This message.
 
   The build configuration is specified in config.sh.

@@ -1,0 +1,7 @@
+#! /bin/sh
+
+echo "Tests are not yet implemented."
+echo "Try the following to check build status:"
+
+echo "  Generate an event: lar -n 10 -c prodsingle_lbne35t.fcl"
+echo "      Event display: lar -c evd_lbne35t.fcl single35t_gen.root"
