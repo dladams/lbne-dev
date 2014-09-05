@@ -15,6 +15,7 @@ if [ $# -eq 0 ]; then
   echo
   echo "> lbne run COMMAND"
 else
+  $LBNE_INSDIR/lbne runscript
   source $RUNSCRIPT
   echo $LBNE_LINE
   echo Running command: $*

@@ -4,10 +4,11 @@
 # Create setup file for running.
 
 RUNSCRIPT=$LBNE_DEVDIR/run.sh
-rm -f $RUNSCRIPT
-echo "source $LBNE_INSDIR/lbneinit.sh" >>$RUNSCRIPT
-for SETUP in $LBNE_DEVDIR/workdir/localProducts*/setup; do
-  echo source $SETUP >>$RUNSCRIPT
-done
-echo mrbslp >>$RUNSCRIPT
-echo "PS1=\"lbne-dev> \"" >>$RUNSCRIPT
+if [ ! -r $RUNSCRIPT ]; then
+  echo "source $LBNE_INSDIR/lbneinit.sh" >>$RUNSCRIPT
+  for SETUP in $LBNE_DEVDIR/workdir/localProducts*/setup; do
+    echo source $SETUP >>$RUNSCRIPT
+  done
+  echo mrbslp >>$RUNSCRIPT
+  echo "PS1=\"lbne-dev> \"" >>$RUNSCRIPT
+fi
