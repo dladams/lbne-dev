@@ -46,10 +46,12 @@ cd srcs
 # Loop over local packages and check out if not already present.
 echo $LBNE_LINE
 echo Checking out packages
-LOCALPRODS=`cat $PKGFILE`
+LOCALPRODS=`cat $PKGFILE | sed 's/#.*//g'`
 for PKG in $LOCALPRODS; do
+  PKGPREFIX=`echo $PKG | awk -F/ '{print $1}'`
+  PKGBASE=`basename $PKG`
   echo $LBNE_LINE
-  if test -r $PKG; then
+  if test -r $PKGBASE; then
     echo Package $PKG is already checked out
   else
     echo Checking out $PKG
@@ -60,7 +62,7 @@ for PKG in $LOCALPRODS; do
       mrb gitCheckout $PKG
       echo $LBNE_LINE
       echo Create local feature branch
-      cd $PKG
+      cd $PKGBASE
       #tmp git flow feature start $GIT_BRANCH_NAME
       cd ..
     fi

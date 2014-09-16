@@ -1,1 +1,3 @@
-lbnecode
+#larsim     # Needed for test with radiologicals in v02_06_01
+lbnecode    # The LBNE code
+https://github.com/dladams/lbne-itest   # DA's integrated tests
