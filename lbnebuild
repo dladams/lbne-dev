@@ -13,10 +13,12 @@ source $LBNE_INSDIR/lbneinit.sh
 cd $LBNE_DEVDIR/workdir
 
 echo $LBNE_LINE
-echo Setting up larsoft
-setup larsoft $LBNE_LARVERSION -q $LBNE_QUAL
+echo Setting up $LBNE_PROJECT
+setup $LBNE_PROJECT $LBNE_PROJECTVERSION -q $LBNE_QUAL
 
-source localProducts_$LBNE_LARPROD/setup
+echo $LBNE_LINE
+echo Setting up $LBNE_PRODUCT
+source localProducts_$LBNE_PRODUCT/setup
 
 echo $LBNE_LINE
 cd $MRB_BUILDDIR

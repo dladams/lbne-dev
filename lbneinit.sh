@@ -20,7 +20,7 @@ alias lb=$LBNE_INSDIR/lbne
 
 # Set configuration defaults.
 export LBNE_PROJECT=larsoft
-export LBNE_LARVERSION=v02_02_01
+export LBNE_PROJECTVERSION=v02_02_01
 export LBNE_QUAL=e5:prof
 export LBNE_VERBOSE=False
 export LBNE_CONFIG_FILE=$LBNE_DEVDIR/config.sh
@@ -53,7 +53,7 @@ if [ -n "$SETUPFILE" -a -r "$SETUPFILE" ]; then
   # Setup derived environment.
   THISBASE=`basename $LBNE_DEVDIR`
   THISUSER=`whoami`
-  export LBNE_LARPROD=`echo larsoft_${LBNE_LARVERSION}_${LBNE_QUAL} | sed 's/:/_/g'`
+  export LBNE_PRODUCT=`echo ${LBNE_PROJECT}_${LBNE_PROJECTVERSION}_${LBNE_QUAL} | sed 's/:/_/g'`
   export LBNE_GIT_BRANCH_NAME=`echo branch-${THISUSER}-${THISBASE} | sed 's/:/_/g'`
   export MRB_PROJECT=$LBNE_PROJECT
   export LBNE_IS_SETUP=True

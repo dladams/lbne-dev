@@ -1,0 +1,33 @@
+# lbnenewProduct
+#
+# David Adams
+# September 2014
+#
+# Creates a skeleton area for a new UPS product.
+#
+# This is for a minimal, null-flavored product.
+
+PROD=$1
+shift
+ARGS="$*"
+
+# LBNE setup.
+source $LBNE_INSDIR/lbneinit.sh
+source $LBNE_DEVDIR/workdir/localProducts_$LBNE_PRODUCT/setup
+
+echo Creating UPS product $PROD
+if [ -z "$MRB_SOURCE" ]; then
+  echo MRB_SOURCE is not defined--no action taken
+set | grep MRB
+  exit 1
+fi
+echo Installation area: $MRB_SOURCE
+
+cd $MRB_SOURCE
+if [ -r $PROD ]; then
+  echo "Product $PROD already exists--no action taken"
+  exit 2
+fi
+mrb newProduct -c -n $PROD
+
+echo Created new product $PROD

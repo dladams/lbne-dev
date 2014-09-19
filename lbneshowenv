@@ -8,8 +8,9 @@
 # LBNE setup.
 source $LBNE_INSDIR/lbneinit.sh
 
-echo "      LBNE_INSDIR = $LBNE_INSDIR"
-echo "      LBNE_DEVDIR = $LBNE_DEVDIR"
-echo "  LBNE_LARVERISON = $LBNE_LARVERSION"
-echo "        LBNE_QUAL = $LBNE_QUAL"
-echo "     LBNE_LARPROD = $LBNE_LARPROD"
+echo "          LBNE_INSDIR = $LBNE_INSDIR"
+echo "          LBNE_DEVDIR = $LBNE_DEVDIR"
+echo "         LBNE_PROJECT = $LBNE_PROJECT"
+echo "  LBNE_PROJECTVERISON = $LBNE_PROJECTVERSION"
+echo "            LBNE_QUAL = $LBNE_QUAL"
+echo "         LBNE_PRODUCT = $LBNE_PRODUCT"

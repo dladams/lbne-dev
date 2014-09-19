@@ -29,8 +29,8 @@ fi
 cd $LBNE_DEVDIR/workdir
 
 echo $LBNE_LINE
-echo Setting up larsoft
-setup larsoft $LBNE_LARVERSION -q $LBNE_QUAL
+echo Setting up $LBNE_PROJECT
+setup $LBNE_PROJECT $LBNE_PROJECTVERSION -q $LBNE_QUAL
 
 if [ -z "$HAVE_WORKDIR" ]; then
   echo $LBNE_LINE
@@ -40,7 +40,7 @@ if [ -z "$HAVE_WORKDIR" ]; then
 fi
 
 pwd
-source localProducts_$LBNE_LARPROD/setup
+source localProducts_$LBNE_PRODUCT/setup
 
 cd srcs
 # Loop over local packages and check out if not already present.

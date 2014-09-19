@@ -31,7 +31,12 @@ source DEVDIR/lbnesetup.sh
 
 # To check out packges initially or after modifying the list.
 # The list of packages is in packages.txt
+# Event if no packages are listed, this must be run once to
+# create the working directory.
 lbne checkout
+
+# To create a new product directory.
+lbne newProduct myproduct
 
 # To build after checkout or local changes.
 lbne build
