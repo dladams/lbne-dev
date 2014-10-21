@@ -17,6 +17,8 @@ Use "lbne help" to see available commands.
 mkdir PKGPATH
 cd PKGPATH
 git clone https://github.com/dladams/lbne-dev
+or
+git clone git@github.com:dladams/lbne-dev.git
 
 # Creating and building a development area.
 # SW is installed an built in dedicated directory DEVDIR.
