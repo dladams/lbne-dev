@@ -31,18 +31,25 @@ export LBNE_LINE="=========================================================="
 source $LBNE_CONFIG_FILE
 
 # Set up UPS, git and mrb.
-# For now, we use the host name to choose the setup file.
+# For now, we use the host name to choose the setup file for fnal
+# and BNL or otherwise assume generic installation at $PRODUCTS.
 if test -n "${LBNE_VERBOSE}"; then echo Setting up UPS; fi
-PRODUCTS=
 if hostname | grep lbnegpvm...fnal.gov >/dev/null; then
+  PRODUCTS=
   LBNE_SITE=FNAL
   SETUPFILE=$LBNE_INSDIR/fnal_setup_lbne.sh
 else if hostname | grep lbne.....rcf.bnl.gov >/dev/null; then
+  PRODUCTS=
   LBNE_SITE=BNL
   SETUPFILE=$LBNE_INSDIR/bnl_setup_lbne.sh
+else if [ -n "$PRODUCTS" ]; then
+  LBNE_SITE=`hostname`
+  SETUPFILE=$LBNE_INSDIR/setup_lbne.sh
 else
+echo PRODUCTS=$PRODUCTS
+
   echo WARNING: Unknown site for host `hostname`
-fi; fi
+fi; fi; fi
 if [ -n "$SETUPFILE" -a -r "$SETUPFILE" ]; then
   source $SETUPFILE
   setup git
