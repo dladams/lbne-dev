@@ -2,7 +2,6 @@
 
 David Adams  
 October 2014  
-Updated August 13, 2014
 
 Package to help with the checkout, build and running of LBNE SW.
 For now, only larsoft is supported.

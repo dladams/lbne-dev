@@ -3,7 +3,7 @@
 # David Adams
 # July 2014
 #
-# Bash file to set the environment to make use the build scripts
+# Bash file to set the environment used by build scripts
 # in this package.
 
 SETUPFILE=`pwd`/lbnesetup.sh

@@ -35,28 +35,28 @@ source $LBNE_CONFIG_FILE
 # For now, we use the host name to choose the setup file for fnal
 # and BNL or otherwise assume generic installation at $PRODUCTS.
 if test -n "${LBNE_VERBOSE}"; then echo Setting up UPS; fi
+export LBNE_UPS_SETUP=
 if hostname | grep lbnegpvm...fnal.gov >/dev/null; then
   PRODUCTS=
   LBNE_SITE=FNAL
-  SETUPFILE=$LBNE_INSDIR/fnal_setup_lbne.sh
+  LBNE_UPS_SETUP=$LBNE_INSDIR/fnal_setup_lbne.sh
 else if hostname | grep lbne.....rcf.bnl.gov >/dev/null; then
   PRODUCTS=
   LBNE_SITE=BNL
-  SETUPFILE=$LBNE_INSDIR/bnl_setup_lbne.sh
+  LBNE_UPS_SETUP=$LBNE_INSDIR/bnl_setup_lbne.sh
 else if [ -n "$PRODUCTS" ]; then
   LBNE_SITE=`hostname`
-  SETUPFILE=$LBNE_INSDIR/setup_lbne.sh
+  LBNE_UPS_SETUP=$LBNE_INSDIR/setup_lbne.sh
 else
 echo PRODUCTS=$PRODUCTS
 
   echo WARNING: Unknown site for host `hostname`
 fi; fi; fi
-if [ -n "$SETUPFILE" -a -r "$SETUPFILE" ]; then
-  source $SETUPFILE
+if [ -n "$LBNE_UPS_SETUP" -a -r "$LBNE_UPS_SETUP" ]; then
+  source $LBNE_UPS_SETUP
   setup git
   setup gitflow
   setup mrb
-  export LBNE_UPS_SETUP=$SETUPFILE
 
   # Setup derived environment.
   THISBASE=`basename $LBNE_DEVDIR`
