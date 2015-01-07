@@ -25,6 +25,7 @@ export LBNE_QUAL=e5:prof
 export LBNE_VERBOSE=False
 export LBNE_CONFIG_FILE=$LBNE_DEVDIR/config.sh
 export LBNE_PACKAGE_FILE=$LBNE_DEVDIR/packages.txt
+export LBNE_HISTORY=$LBNE_DEVDIR/history.log
 export LBNE_LINE="=========================================================="
 
 # Read local configuration.

@@ -13,3 +13,5 @@ fi
 echo Cleaning...
 rm -rf $LBNE_DEVDIR/workdir
 rm -rf $LBNE_DEVDIR/run.sh
+rm -rf $LBNE_DEVDIR/history.log
+rm -rf $LBNE_DEVDIR/lbnesetup.sh

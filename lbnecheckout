@@ -72,7 +72,9 @@ for PKGTAG in $PKGTAGS; do
       if [ -n "$TAG" ]; then
         TAGSUF="-t $TAG"
       fi
-      if ! mrb gitCheckout $TAGSUF $PKG; then
+      COM="mrb gitCheckout $TAGSUF $PKG"
+      #if ! mrb gitCheckout $TAGSUF $PKG; then
+      if ! $COM; then
         echo Checkout failed for $TAGSUF $PKG
         if echo $PKG | grep ^ssh: >/dev/null 2>&1; then 
           echo Test ssh access with
@@ -83,6 +85,8 @@ for PKGTAG in $PKGTAGS; do
           echo "  eval \"$(ssh-agent -s)\""
         fi
         exit 1
+      else
+        echo $COM >> $LBNE_HISTORY
       fi
       STAT=$?
       echo Create local feature branch

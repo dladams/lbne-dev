@@ -24,7 +24,9 @@ echo $LBNE_LINE
 cd $MRB_BUILDDIR
 echo Building in `pwd`
 mrbsetenv
-mrb i -j4
+COM="mrb i -j4"
+$COM 
+echo "$COM" >> $LBNE_HISTORY
 
 echo Set up to run
 mrbslp
