@@ -22,6 +22,7 @@ echo '
   shell - Start a shell to run commands.
   upslist - List available versions of UPS packge ARG [larsoft]
   help - This message.
+  readme - Display the documentation from the package readme.
 
   The build configuration is specified in config.sh.
   The list of checked-out packages is in packages.txt.

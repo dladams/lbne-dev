@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# lbnereadme
+#
+# David Adams
+# December 2014
+#
+#
+# Displays the lbne-dev package readme.
+# Typicall invoked as
+# > lbne readme
+
+cat $LBNE_INSDIR/README.md
