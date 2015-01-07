@@ -8,3 +8,4 @@ echo "      Event display: lar -c evd_lbne35t.fcl single35t_gen.root"
 echo
 echo "  Generate an event: lar -n 10 -c ../workdir/srcs/lbne-itest/lbtest_single.fcl"
 echo "  Generate an event: lar -n 10 -c ../workdir/srcs/lbne-itest/lbtest_single_radiological.fcl"
+echo "      Event display: lar -c evd_lbne35t.fcl lbtest_single.root"

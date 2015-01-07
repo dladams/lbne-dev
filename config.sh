@@ -10,12 +10,12 @@
 LBNE_PROJECT=larsoft
 
 # For larsoft, specify the version.
-LBNE_PROJECTVERSION=v02_06_01
+LBNE_PROJECTVERSION=v03_01_00
 
 # Specify the UPS qualifier.
 # UPS can be used to discover the available values, e.g.
 # > ups list -aK+ | grep larsoft | grep v02_03_00
-LBNE_QUAL=e5:prof
+LBNE_QUAL=e6:prof
 
 # Flag for which increasing values provide more log messages.
 LBNE_VERBOSE=1

@@ -17,11 +17,11 @@ if ! test -r $PKGFILE; then
 fi
 
 # Create working area if needed.
-HAVE_WORKDIR=`ls -d workdir 2>/dev/null`
+HAVE_WORKDIR=`ls -d $LBNE_DEVDIR/workdir 2>/dev/null`
 echo $LBNE_LINE
 if [ -z "$HAVE_WORKDIR" ]; then
   echo Creating new workdir
-  mkdir workdir
+  mkdir $LBNE_DEVDIR/workdir
 else
   echo Using existing workdir
 fi
@@ -46,8 +46,17 @@ cd srcs
 # Loop over local packages and check out if not already present.
 echo $LBNE_LINE
 echo Checking out packages
-LOCALPRODS=`cat $PKGFILE | sed 's/#.*//g'`
-for PKG in $LOCALPRODS; do
+PKGTAGS=`cat $PKGFILE | sed 's/#.*//g'`
+for PKGTAG in $PKGTAGS; do
+  echo package%tag = $PKGTAG
+  # PKGTAG = PKG or PKG%TAG
+  PKG=`echo $PKGTAG | awk -F% '{print $1}'`
+  TAG=`echo $PKGTAG | awk -F% '{print $2}'`
+  EXTRA=`echo $PKGTAG | awk -F% '{print $3}'`
+  if [ -n "$EXTRA" ]; then
+    echo Unexpected package%tag: $PKGTAG
+    exit 1
+  fi
   PKGPREFIX=`echo $PKG | awk -F/ '{print $1}'`
   PKGBASE=`basename $PKG`
   echo $LBNE_LINE
@@ -59,9 +68,25 @@ for PKG in $LOCALPRODS; do
       git clone https://github.com/czczc/LArViewer.git
       cp -r LArViewer/LBNE35t/DataConverter lbnecode/lbne
     else
-      mrb gitCheckout $PKG
-      echo $LBNE_LINE
+      TAGSUF=
+      if [ -n "$TAG" ]; then
+        TAGSUF="-t $TAG"
+      fi
+      if ! mrb gitCheckout $TAGSUF $PKG; then
+        echo Checkout failed for $TAGSUF $PKG
+        if echo $PKG | grep ^ssh: >/dev/null 2>&1; then 
+          echo Test ssh access with
+          echo "   ssh -T git@github.com"
+          echo If that fails, add your key to the ssh agent:
+          echo "  ssh-add ~/.ssh/github_rsa"
+          echo "If that fails, start ssh agent with:"
+          echo "  eval \"$(ssh-agent -s)\""
+        fi
+        exit 1
+      fi
+      STAT=$?
       echo Create local feature branch
+      echo $LBNE_LINE
       cd $PKGBASE
       #tmp git flow feature start $GIT_BRANCH_NAME
       cd ..
