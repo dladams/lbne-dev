@@ -10,7 +10,7 @@
 LBNE_PROJECT=larsoft
 
 # For larsoft, specify the version.
-LBNE_PROJECTVERSION=v03_04_05
+LBNE_PROJECTVERSION=v03_07_00
 
 # Specify the UPS qualifier.
 # UPS can be used to discover the available values, e.g.

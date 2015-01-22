@@ -23,11 +23,17 @@ source localProducts_$LBNE_PRODUCT/setup
 echo $LBNE_LINE
 cd $MRB_BUILDDIR
 echo Building in `pwd`
+if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbsetenv; fi
 mrbsetenv
+if [ -n "$LBNE_VERBOSE" ]; then echo Running $COM; fi
 COM="mrb i -j4"
+if [ -n "$LBNE_VERBOSE" ]; then echo Running $COM; fi
 $COM 
 echo "$COM" >> $LBNE_HISTORY
 
 echo Set up to run
+if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbslp; fi
 mrbslp
 cd $THISDIR
+
+if [ -n "$LBNE_VERBOSE" ]; then echo exiting lbnebuild; fi

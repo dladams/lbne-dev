@@ -48,10 +48,11 @@ echo $LBNE_LINE
 echo Checking out packages
 PKGTAGS=`cat $PKGFILE | sed 's/#.*//g'`
 for PKGTAG in $PKGTAGS; do
-  echo package%tag = $PKGTAG
+  echo $LBNE_LINE
   # PKGTAG = PKG or PKG%TAG
   PKG=`echo $PKGTAG | awk -F% '{print $1}'`
   TAG=`echo $PKGTAG | awk -F% '{print $2}'`
+  echo Checking out $PKG $TAG
   EXTRA=`echo $PKGTAG | awk -F% '{print $3}'`
   if [ -n "$EXTRA" ]; then
     echo Unexpected package%tag: $PKGTAG
@@ -59,7 +60,6 @@ for PKGTAG in $PKGTAGS; do
   fi
   PKGPREFIX=`echo $PKG | awk -F/ '{print $1}'`
   PKGBASE=`basename $PKG`
-  echo $LBNE_LINE
   if test -r $PKGBASE; then
     echo Package $PKG is already checked out
   else
@@ -97,12 +97,30 @@ for PKGTAG in $PKGTAGS; do
     fi
   fi
 done
+echo $LBNE_LINE
+
+# Fix the versions in local products to correspond to check outs.
+# See https://cdcvs.fnal.gov/redmine/projects/lbnecode/wiki/_Tutorial_#When-a-new-LArSoft-release-is-available-and-you-want-to-develop-against-the-new-LArSoft-release.
+if [ -n "$MRB_TOP" ]; then
+  cd $MRB_TOP
+  DIR=localProducts_$LBNE_PRODUCT
+  if [ -r $DIR ]; then
+    if [ -n "$LBNE_VERBOSE" ]; then echo Removing $DIR; fi
+    rm -rf $DIR
+  fi
+  if [ -n "$LBNE_VERBOSE" ]; then echo Running mrb newDev; fi
+  mrb newDev -p
+else
+  echo MRB_TOP is not defined
+  exit 1
+fi
 
 echo $LBNE_LINE
 exit 5
 
 echo $LBNE_LINE
 echo Set up to run
+if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbslp; fi
 mrbslp
 cd $THISDIR
 
