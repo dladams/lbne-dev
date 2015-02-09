@@ -10,14 +10,15 @@
 # LBNE setup.
 source $LBNE_INSDIR/lbneinit.sh
 
-cd $LBNE_DEVDIR/workdir
 
 echo $LBNE_LINE
+cd $LBNE_DEVDIR/workdir
 echo Setting up $LBNE_PROJECT
 setup $LBNE_PROJECT $LBNE_PROJECTVERSION -q $LBNE_QUAL
 
 echo $LBNE_LINE
-echo Setting up $LBNE_PRODUCT
+cd $LBNE_DEVDIR/workdir
+echo Setting up local products
 source localProducts_$LBNE_PRODUCT/setup
 
 echo $LBNE_LINE
@@ -25,12 +26,14 @@ cd $MRB_BUILDDIR
 echo Building in `pwd`
 if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbsetenv; fi
 mrbsetenv
-if [ -n "$LBNE_VERBOSE" ]; then echo Running $COM; fi
+
+echo $LBNE_LINE
 COM="mrb i -j4"
 if [ -n "$LBNE_VERBOSE" ]; then echo Running $COM; fi
 $COM 
 echo "$COM" >> $LBNE_HISTORY
 
+echo $LBNE_LINE
 echo Set up to run
 if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbslp; fi
 mrbslp

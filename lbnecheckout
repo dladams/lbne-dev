@@ -18,21 +18,27 @@ fi
 
 # Create working area if needed.
 HAVE_WORKDIR=`ls -d $LBNE_DEVDIR/workdir 2>/dev/null`
+NEED_NEWDEV=
 echo $LBNE_LINE
 if [ -z "$HAVE_WORKDIR" ]; then
   echo Creating new workdir
   mkdir $LBNE_DEVDIR/workdir
+  NEED_NEWDEV=1
 else
   echo Using existing workdir
 fi
 
 cd $LBNE_DEVDIR/workdir
 
+if [ ! -r srcs ]; then
+  NEED_NEWDEV=1
+fi
+
 echo $LBNE_LINE
 echo Setting up $LBNE_PROJECT
 setup $LBNE_PROJECT $LBNE_PROJECTVERSION -q $LBNE_QUAL
 
-if [ -z "$HAVE_WORKDIR" ]; then
+if [ -n "$NEED_NEWDEV" ]; then
   echo $LBNE_LINE
   echo Creating mrb area
   mrb newDev 
@@ -42,7 +48,12 @@ fi
 pwd
 source localProducts_$LBNE_PRODUCT/setup
 
-cd srcs
+if ! cd srcs; then
+  echo Unable to find workdir/srcs
+  echo PWD is `pwd`
+  exit 1
+fi
+
 # Loop over local packages and check out if not already present.
 echo $LBNE_LINE
 echo Checking out packages
