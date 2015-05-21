@@ -25,7 +25,9 @@ echo $LBNE_LINE
 cd $MRB_BUILDDIR
 echo Building in `pwd`
 if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbsetenv; fi
-mrbsetenv
+COM=mrbsetenv
+$COM 
+echo "$COM" >> $LBNE_HISTORY
 
 echo $LBNE_LINE
 COM="mrb i -j4"

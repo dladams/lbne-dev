@@ -10,5 +10,9 @@ if [ ! -r $RUNSCRIPT ]; then
     echo source $SETUP >>$RUNSCRIPT
   done
   echo mrbslp >>$RUNSCRIPT
+  echo 'SAVEDIR=`pwd`' >>$RUNSCRIPT
+  echo 'cd $MRB_BUILDDIR' >>$RUNSCRIPT
+  echo 'mrbsetenv' >>$RUNSCRIPT
+  echo 'cd $SAVEDIR' >>$RUNSCRIPT
   echo "PS1=\"lbne-dev> \"" >>$RUNSCRIPT
 fi

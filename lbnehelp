@@ -14,7 +14,8 @@ echo '
   ---
   checkout - To check out the packages listed in packages.txt.
   build - To build all checked-out packages.
-  clean - To remove build and checked-out packages
+  clean - To remove files added by the build system (mrb z)
+  restart - To remove build and checked-out packages
   show - Shows configuration information.
   showenv - Shows configuration environment.
   runscript - Install the runs cript used in run and shell

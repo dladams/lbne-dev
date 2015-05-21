@@ -1,17 +1,33 @@
-#!/bin/sh
-#
-# lbneclean
+#!/bin/bash
+
+# lbnebuild
 #
 # David Adams
 # July 2014
+#
+# Build the checked-out code.
 
-if test -z "$LBNE_DEVDIR"; then
-  echo Development directory not found.
-  exit 1
-fi
+# LBNE setup.
+source $LBNE_INSDIR/lbneinit.sh
 
-echo Cleaning...
-rm -rf $LBNE_DEVDIR/workdir
-rm -rf $LBNE_DEVDIR/run.sh
-rm -rf $LBNE_DEVDIR/history.log
-rm -rf $LBNE_DEVDIR/lbnesetup.sh
+echo $LBNE_LINE
+cd $LBNE_DEVDIR/workdir
+echo Setting up $LBNE_PROJECT
+setup $LBNE_PROJECT $LBNE_PROJECTVERSION -q $LBNE_QUAL
+
+echo $LBNE_LINE
+cd $LBNE_DEVDIR/workdir
+echo Setting up local products
+source localProducts_$LBNE_PRODUCT/setup
+
+echo $LBNE_LINE
+cd $MRB_BUILDDIR
+echo Building in `pwd`
+if [ -n "$LBNE_VERBOSE" ]; then echo Running mrbsetenv; fi
+mrbsetenv
+
+echo Cleaning
+COM="mrb z"
+if [ -n "$LBNE_VERBOSE" ]; then echo Running $COM; fi
+$COM 
+echo "$COM" >> $LBNE_HISTORY
